@@ -3,6 +3,7 @@ import { day2 } from "../days/2"
 import { day3 } from "../days/3"
 import { day4 } from "../days/4"
 import { day5 } from "../days/5"
+import { day6 } from "../days/6"
 import { ParseResult } from "./types"
 
 function getDate(args: string[]): number {
@@ -18,6 +19,7 @@ export function getDay(args: string[]): ParseResult {
     case 3: return buildDay(day3)
     case 4: return buildDay(day4)
     case 5: return buildDay(day5)
+    case 6: return buildDay(day6)
     default:
       return { solution1: 'day not found', solution2: 'day not found' }
   }
