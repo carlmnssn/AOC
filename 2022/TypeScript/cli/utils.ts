@@ -1,30 +1,21 @@
-import { day1 } from "../days/1"
-import { day2 } from "../days/2"
-import { day3 } from "../days/3"
-import { day4 } from "../days/4"
-import { day5 } from "../days/5"
-import { day6 } from "../days/6"
 import { ParseResult } from "./types"
 
+type Day = { p1?: () => string, p2?: () => string }
 function getDate(args: string[]): number {
   const dayFlagIndex = args.indexOf('--day')
   const day = args[dayFlagIndex + 1]
   return Math.min(25, Number(day) || new Date().getDate())
 }
 
-export function getDay(args: string[]): ParseResult {
-  switch (getDate(args)) {
-    case 1: return buildDay(day1)
-    case 2: return buildDay(day2)
-    case 3: return buildDay(day3)
-    case 4: return buildDay(day4)
-    case 5: return buildDay(day5)
-    case 6: return buildDay(day6)
-    default:
-      return { solution1: 'day not found', solution2: 'day not found' }
+export async function getDay(args: string[]): Promise<ParseResult> {
+  try {
+    const { day } = await import(`../days/${getDate(args)}`)
+    return buildDay(day)
+  } catch {
+    return ({ solution1: 'day not found', solution2: 'day not found' }
+    )
   }
 }
-
-const buildDay = ({ p1, p2 }: { p1?: () => string, p2?: () => string }) => {
+const buildDay = ({ p1, p2 }: Day) => {
   return { solution1: p1?.() ?? 'day not done', solution2: p2?.() ?? 'day not done' }
 }

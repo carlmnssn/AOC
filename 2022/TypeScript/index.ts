@@ -1,3 +1,9 @@
 import { parseInput } from "./cli";
 
-console.log(parseInput(process.argv))
+
+const main = async () => {
+  const data = await parseInput(process.argv)
+  console.log(data)
+}
+main()
+
